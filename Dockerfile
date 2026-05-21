@@ -9,15 +9,15 @@ RUN apt-get update && apt-get install -y \
     gcc \
     build-essential \
     libpq-dev \
-    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
-RUN pip install --upgrade pip setuptools wheel
+# Install compatible setuptools version
+RUN pip install --upgrade pip
+RUN pip install setuptools==68.2.2 wheel
 
-RUN pip install --no-cache-dir setuptools
-
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
