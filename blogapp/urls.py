@@ -1,12 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Django Running Successfully")
+from django.urls import path
+from blogapp.views import BlogView, PublicBlogView
 
 urlpatterns = [
-    path('', home),
-    path('admin/', admin.site.urls),
-    path('api/', include('blogapp.urls')),
+    path('blogs/', BlogView.as_view(), name='blogs'),
+    path('publicblogs/', PublicBlogView.as_view(), name='publicblogs'),
 ]
